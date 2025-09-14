@@ -1,0 +1,120 @@
+<html>
+
+<head>
+
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="menu">
+      <ul>
+        <!-- Menu links to show SignIn and SignUp forms -->
+        <li><a href="#" onclick="showloginbox();">SignIn</a></li>
+        <li><a href="#" onclick="showlog_inbox();">SignUp</a></li>
+      </ul>
+    </div>
+
+    <div class="forms-wrapper">
+      <!-- Signup form container -->
+      <div class="signup-container" id="sign_up">
+        <h2>Signup</h2>
+        <div id="cross_signup" onclick="hide_signup();">&#x2715;</div> <!-- Close button for signup modal -->
+
+        <form action="/submit" method="post">
+          <!-- First Name field -->
+          <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" name="firstname">
+          </div>
+          <!-- Last Name field -->
+          <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname" name="lastname">
+          </div>
+          <!-- Email field -->
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
+          </div>
+          <!-- Gender selection as radio buttons -->
+          <div class="form-group">
+            <div id="gender_options">
+              <label><input type="radio" name="gender" value="male"> Male</label>
+              <label><input type="radio" name="gender" value="female"> Female</label>
+              <label><input type="radio" name="gender" value="other"> Other</label>
+            </div>
+          </div>
+          <!-- City field -->
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city">
+          </div>
+          <!-- Address field as textarea -->
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="3"></textarea>
+          </div>
+
+          <!-- Password creation field with show/hide button -->
+          <label for="password">Create Password</label>
+          <div class="form-group" id="pass_show">
+            <input type="password" id="password" name="password">
+            <input type="button" id="show" value="show" onclick="hideshowpass(this);" />
+            <span id="pass_err">password must have capital small alphabets ,special character like !@#$%^&*(), digits
+              and length 7 to 14</span>
+          </div>
+
+          <!-- Date of Birth field with datepicker -->
+          <label for="dob">Date of Birth</label>
+          <input type="text" id="dob2" name="dob"> <!-- Text input used with jQuery UI Datepicker -->
+
+          <!-- Submit button for signup -->
+          <input type="submit" value="signup" id="signup" />
+        </form>
+      </div>
+
+      <!-- Login form container -->
+      <div class="login-container" id="login_up">
+        <h2>SignIn</h2>
+        <div id="cross_login" onclick="hide_login();">&#x2715;</div> <!-- Close button for login modal -->
+
+        <form action="/submit" method="post" onsubmit="return val_form();">
+          <!-- Name field for login (uses 'Name' in name attribute) -->
+          <label for="username">Name</label>
+          <input type="text" id="username" name="Name" placeholder="Enter Your Full Name" />
+          <span id="user_err">first name at least of 2 in length</span>
+
+          <!-- Password field with show/hide button -->
+          <label for="password">Password</label>
+          <div class="form-group" id="pass_show">
+            <input type="password" id="password" name="password" placeholder="Enter Password" />
+            <input type="button" id="show" value="show" onclick="hideshowpass(this);" />
+          </div>
+          <span id="pass_err">password must have capital small alphabets, special character like !@#$%^&*(), digits and
+            length 7 to 14</span>
+
+          <!-- Forgot password link -->
+          <div class="forgot"><a href="#">Forgot Password?</a></div>
+          <!-- Submit button for login -->
+          <input type="submit" value="login" id="login" />
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom JavaScript for validation and interactivity -->
+  <script src="script.js"></script>
+
+  <script>
+    $(function () {
+      $("#dob2").datepicker({
+        dateFormat: "dd-mm-yy",
+        maxDate: "-18y"
+      });
+    });
+  </script>
+
